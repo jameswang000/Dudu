@@ -1,0 +1,100 @@
+.provideTextScreenContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  gap: 5px;
+}
+
+.provideTextScreenHeader {
+  font-size: 48px;
+  padding: 0px;
+  margin: 0px;
+  font-style: normal;
+  font-weight: 500;
+  text-align: center;
+  color: var(--color-text);
+  font-family: var(--font-latin);
+}
+
+.provideTextScreenDescription {
+  font-size: 20px;
+  padding: 0px;
+  margin: 0px;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  color: var(--color-text);
+  font-family: var(--font-latin);
+  padding-bottom: 10px;
+}
+
+.provideTextScreenButton {
+  margin-top: 10px;
+  background-color: #a0c4ff;
+  color: var(--color-text);
+  font-size: 24px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.provideTextScreenButton:hover {
+  background-color: #c0d8ff; /* lighter blue on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* slightly stronger shadow */
+  transform: translateY(-1px); /* subtle lift effect */
+}
+
+.provideTextScreenButton:active {
+  background-color: #a0c4ff; /* revert to base */
+  transform: translateY(0); /* press-down effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* back to normal shadow */
+}
+
+.provideTextScreenButton:focus {
+  outline: 2px solid #5577aa; /* accessible focus ring */
+  outline-offset: 2px;
+}
+
+.provideTextScreenButton:disabled {
+  background-color: #e0e0e0; /* light gray background */
+  color: #888888; /* muted text */
+  cursor: not-allowed; /* shows the “disabled” cursor */
+  box-shadow: none; /* remove shadow */
+  transform: none; /* reset any hover/active transforms */
+}
+
+.provideTextScreenTextArea {
+  width: 100%; /* full container width */
+  max-width: 800px; /* optional max width */
+  height: 200px; /* larger height for visibility */
+  padding: 14px 16px;
+  text-align: left;
+
+  font-family: var(--font-cjk);
+  font-size: 20px; /* slightly larger for readability */
+  line-height: 1.6; /* better line spacing */
+  color: #111111; /* dark text for contrast */
+
+  background-color: #fff8e7; /* very light beige for subtle warmth */
+  border: 1px solid #e0e0e0; /* soft border to define edges */
+  border-radius: 8px; /* soft rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* subtle shadow for depth */
+
+  resize: vertical; /* allow user to adjust height */
+  overflow: auto; /* scroll if text overflows */
+
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.provideTextScreenTextArea:focus {
+  outline: none; /* remove default focus */
+  border-color: #a0c4ff; /* highlight border in soft blue */
+  box-shadow: 0 0 8px rgba(160, 196, 255, 0.4); /* subtle glow */
+}
