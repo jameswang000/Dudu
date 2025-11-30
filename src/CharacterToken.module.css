@@ -1,0 +1,23 @@
+.cell {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-family: var(--font-cjk);
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.inlineWord {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: var(--font-latin);
+  line-height: 1;
+
+  margin: 0;
+  padding: 0;
+}

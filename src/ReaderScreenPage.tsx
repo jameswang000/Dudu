@@ -1,11 +1,13 @@
 import CharacterToken from "./CharacterToken";
 import type { Token } from "./ReaderScreen";
+import styles from "./ReaderScreenPage.module.css";
 
 interface ReaderScreenPageProps {
   tokens: Token[];
   columnGap: number;
   rowGap: number;
   readerWidth: number;
+  fontSize: number;
 }
 
 const ReaderScreenPage = ({
@@ -13,6 +15,7 @@ const ReaderScreenPage = ({
   columnGap,
   rowGap,
   readerWidth,
+  fontSize,
 }: ReaderScreenPageProps) => {
   const tokenComponents = tokens.map(({ type, value }) => {
     let isEnglishLike;
@@ -22,9 +25,30 @@ const ReaderScreenPage = ({
       isEnglishLike = false;
     }
 
-    return <CharacterToken isEnglishLike={isEnglishLike} value={value} />;
+    return (
+      <CharacterToken
+        isEnglishLike={isEnglishLike}
+        value={value}
+        fontSize={fontSize}
+      />
+    );
   });
-  return <div>{tokenComponents}</div>;
+
+  const cellWidth = fontSize * 1.1;
+  return (
+    <div
+      className={styles.readerScreenPageGrid}
+      style={{
+        rowGap: rowGap,
+        columnGap: columnGap,
+        width: `${readerWidth}%`,
+        gridTemplateColumns: `repeat(auto-fit, ${cellWidth}px)`,
+        gridTemplateRows: `repeat(auto-fit, ${cellWidth}px)`,
+      }}
+    >
+      {tokenComponents}
+    </div>
+  );
 };
 
 export default ReaderScreenPage;

@@ -46,7 +46,7 @@ const punctuationMap = {
 } as const;
 
 const tokenRegex =
-  /([A-Za-z]+)|([\u4e00-\u9fff])|([0-9]+)|([.,!?;:"'()[\]<>/—-])|(\s+)/g;
+  /([A-Za-z]+)|([\u4E00-\u9FFF])|([0-9]+)|([\u3000-\u303F\uFF01-\uFF0F\uFF1A-\uFF20\uFF3B-\uFF40\uFF5B-\uFF65.,!?;:"'()[\]<>/—\-、。「」『』])|(\s+)/g;
 
 type PunctuationKey = keyof typeof punctuationMap;
 
@@ -103,23 +103,25 @@ const ReaderScreen = ({ rawText }: ReaderScreenProps) => {
     return tokenizeRawText(rawText);
   }, [rawText]);
 
-  const [columnGap, setColumnGap] = useState<number>(20);
-  const [rowGap, setRowGap] = useState<number>(20);
+  const [columnGap, setColumnGap] = useState<number>(0);
+  const [rowGap, setRowGap] = useState<number>(15);
   const [readerWidth, setReaderWidth] = useState<number>(60);
+  const [fontSize, setFontSize] = useState<number>(36);
 
   return (
     <div className={style.readerScreenContainer}>
-      {rawText}
       <ReaderScreenPage
         tokens={tokens}
         columnGap={columnGap}
         rowGap={rowGap}
         readerWidth={readerWidth}
+        fontSize={fontSize}
       />
       <ReaderScreenToolBar
         setColumnGap={setColumnGap}
         setRowGap={setRowGap}
         setReaderWidth={setReaderWidth}
+        setFontSize={setFontSize}
       />
     </div>
   );

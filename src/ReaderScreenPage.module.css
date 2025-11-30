@@ -1,0 +1,6 @@
+.readerScreenPageGrid {
+  display: grid;
+  grid-auto-flow: row;
+  line-height: 1;
+  padding: 48px 0px;
+}
