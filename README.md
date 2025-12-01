@@ -22,3 +22,4 @@ There is also a "Back" button that returns you back to the Welcome page, so that
 ## Contact
 
 Dudu is still in development, so if you have feedback or questions, please contact the creator at jmaeswnag@gmail.com.
+The Github is also available at the following link: https://github.com/jameswang000/Dudu.
