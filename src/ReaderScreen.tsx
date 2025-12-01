@@ -46,16 +46,17 @@ const punctuationMap = {
 } as const;
 
 const tokenRegex =
-  /([A-Za-z]+)|([\u4E00-\u9FFF])|([0-9]+)|([\u3000-\u303F\uFF01-\uFF0F\uFF1A-\uFF20\uFF3B-\uFF40\uFF5B-\uFF65.,!?;:"'()[\]<>/—\-、。「」『』])|(\s+)/g;
+  /([A-Za-z]+)|([\u4E00-\u9FFF])|([0-9]+)|([\u3000-\u303F\uFF01-\uFF0F\uFF1A-\uFF20\uFF3B-\uFF40\uFF5B-\uFF65.,!?;:"'()[\]<>/—\-、。「」『』])|(\r?\n)|([ \t]+)/g;
 
 type PunctuationKey = keyof typeof punctuationMap;
 
 export type Token =
-  | { type: "english"; value: string }
-  | { type: "chinese"; value: string }
-  | { type: "number"; value: string }
-  | { type: "punct"; value: string }
-  | { type: "space"; value: string };
+  | { type: "english"; value: string; index: number }
+  | { type: "chinese"; value: string; index: number }
+  | { type: "number"; value: string; index: number }
+  | { type: "punct"; value: string; index: number }
+  | { type: "lineBreak"; value: string; index: number }
+  | { type: "space"; value: string; index: number };
 
 const toFullWidth = (c: string): string => {
   if (c in punctuationMap) {
@@ -68,20 +69,23 @@ const toFullWidth = (c: string): string => {
 const tokenizeRawText = (rawText: string): Token[] => {
   const tokens: Token[] = [];
   let match: RegExpExecArray | null;
-
+  let i = 0;
   while ((match = tokenRegex.exec(rawText)) !== null) {
     const raw = match[0];
     if (match[1]) {
-      tokens.push({ type: "english", value: raw });
+      tokens.push({ type: "english", value: raw, index: i });
     } else if (match[2]) {
-      tokens.push({ type: "chinese", value: raw });
+      tokens.push({ type: "chinese", value: raw, index: i });
     } else if (match[3]) {
-      tokens.push({ type: "number", value: raw });
+      tokens.push({ type: "number", value: raw, index: i });
     } else if (match[4]) {
-      tokens.push({ type: "punct", value: raw });
+      tokens.push({ type: "punct", value: raw, index: i });
     } else if (match[5]) {
-      tokens.push({ type: "space", value: raw });
+      tokens.push({ type: "lineBreak", value: raw, index: i });
+    } else if (match[6]) {
+      tokens.push({ type: "space", value: raw, index: i });
     }
+    i += 1;
   }
 
   const fullWidthTypes = new Set(["punct", "space"] as const);
@@ -104,9 +108,9 @@ const ReaderScreen = ({ rawText }: ReaderScreenProps) => {
   }, [rawText]);
 
   const [columnGap, setColumnGap] = useState<number>(0);
-  const [rowGap, setRowGap] = useState<number>(15);
+  const [rowGap, setRowGap] = useState<number>(5);
   const [readerWidth, setReaderWidth] = useState<number>(60);
-  const [fontSize, setFontSize] = useState<number>(36);
+  const [fontSize, setFontSize] = useState<number>(24);
 
   return (
     <div className={style.readerScreenContainer}>

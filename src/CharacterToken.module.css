@@ -5,9 +5,28 @@
   text-align: center;
 
   font-family: var(--font-cjk);
+  color: var(--color-text);
   margin: 0;
   padding: 0;
   line-height: 1;
+}
+
+.characterTokenCellContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.15s ease,
+    opacity 0.15s ease;
+  border-radius: 5px;
+}
+
+.characterTokenCellContainer:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.cell:active {
+  transform: scale(0.97);
 }
 
 .inlineWord {
@@ -16,6 +35,7 @@
   align-items: center;
   text-align: center;
   font-family: var(--font-latin);
+  color: var(--color-text);
   line-height: 1;
 
   margin: 0;

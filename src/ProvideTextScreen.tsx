@@ -1,6 +1,5 @@
 import React, { useCallback, useState, type SetStateAction } from "react";
 import style from "./ProvideTextScreen.module.css";
-import dudu_logo from "./images/dudu_favicon.jpg";
 
 interface ProvideTextScreenProps {
   setRawText: React.Dispatch<SetStateAction<string | undefined>>;

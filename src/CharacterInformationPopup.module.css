@@ -1,0 +1,42 @@
+.characterInformationPopupContainer {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  min-width: 160px;
+  max-width: 320px;
+  background-color: red;
+  padding: 10px 12px;
+  background: var(--color-popupBackground);
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: 0 8px 28px rgba(16, 24, 40, 0.15);
+  border: 1px solid gray;
+  z-index: 9999;
+  font-family: var(--font-latin);
+  font-size: 14px;
+  color: var(--color-text);
+  transform-origin: top left;
+}
+
+.characterInformationPopupContainer::after {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  z-index: 9999;
+  border-width: 6px; /* size of the triangle */
+  border-style: solid;
+  border-color: transparent transparent var(--color-popupBackground) transparent;
+}
+
+.characterInformationPopupContainer::before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -100%);
+  border-width: 7px; /* size of the triangle */
+  border-style: solid;
+  border-color: transparent transparent gray transparent;
+}

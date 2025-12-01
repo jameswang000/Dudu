@@ -1,9 +1,13 @@
+import { type SetStateAction } from "react";
+import CharacterInformationPopup from "./CharacterInformationPopup";
 import styles from "./CharacterToken.module.css";
+import type { Token } from "./ReaderScreen";
 
 interface CharacterTokenProps {
-  isEnglishLike: boolean;
-  value: string;
+  token: Token;
   fontSize: number; // In px
+  selectedIndex: number | undefined;
+  setSelectedIndex: React.Dispatch<SetStateAction<number | undefined>>;
 }
 
 const calculateTokenWidth = (
@@ -21,20 +25,22 @@ const calculateTokenWidth = (
 };
 
 const CharacterToken = ({
-  isEnglishLike,
-  value,
+  token,
   fontSize,
+  selectedIndex,
+  setSelectedIndex,
 }: CharacterTokenProps) => {
   const fontFamily = "Segoe UI"; // Hardcode this for now.
-  const cellWidth = fontSize * 1.1;
+  const cellWidth = fontSize;
+  const isSelected = selectedIndex === token.index;
 
-  if (isEnglishLike) {
-    const tokenWidth = calculateTokenWidth(value, fontSize, fontFamily);
+  if (token.type === "english" || token.type === "number") {
+    const tokenWidth = calculateTokenWidth(token.value, fontSize, fontFamily);
     let cellValue;
     if (tokenWidth === undefined) {
       cellValue = "？";
     } else {
-      cellValue = value;
+      cellValue = token.value;
     }
     const numCells =
       tokenWidth === undefined ? 0 : Math.ceil(tokenWidth / cellWidth);
@@ -51,15 +57,44 @@ const CharacterToken = ({
     );
   }
 
+  if (token.type === "lineBreak") {
+    return (
+      <span
+        style={{
+          gridColumn: "1 / -1",
+        }}
+      ></span>
+    );
+  }
+
   return (
-    <span
-      className={styles.cell}
+    <div
+      className={
+        token.type === "chinese" ? styles.characterTokenCellContainer : ""
+      }
       style={{
-        fontSize: fontSize,
+        position: "relative",
       }}
     >
-      {value}
-    </span>
+      <span
+        onClick={() => {
+          if (isSelected) {
+            setSelectedIndex(undefined);
+          } else {
+            setSelectedIndex(token.index);
+          }
+        }}
+        className={styles.cell}
+        style={{
+          fontSize: fontSize,
+        }}
+      >
+        {token.value}
+      </span>
+      {token.type === "chinese" && isSelected ? (
+        <CharacterInformationPopup cellWidth={cellWidth} />
+      ) : undefined}
+    </div>
   );
 };
 

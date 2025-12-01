@@ -76,6 +76,8 @@ h6 {
 
 :root {
   --color-background: #fff0c9;
+  --color-pageBackground: #fff7e2;
+  --color-popupBackground: #e0e0e0;
   --color-text: #121928;
   --font-cjk: "Noto Sans SC", "PingFang SC", sans-serif;
   --font-latin: "Segoe UI", Helvetica, Arial, sans-serif;
