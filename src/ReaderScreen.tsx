@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type SetStateAction } from "react";
 import ReaderScreenToolBar from "./ReaderScreenToolBar";
 import ReaderScreenPage from "./ReaderScreenPage";
 import style from "./ReaderScreen.module.css";
 
 interface ReaderScreenProps {
   rawText: string;
+  setRawText: React.Dispatch<SetStateAction<string | undefined>>;
 }
 
 const punctuationMap = {
@@ -101,7 +102,7 @@ const tokenizeRawText = (rawText: string): Token[] => {
   return fullWidthTokens;
 };
 
-const ReaderScreen = ({ rawText }: ReaderScreenProps) => {
+const ReaderScreen = ({ rawText, setRawText }: ReaderScreenProps) => {
   // Begin by tokenizing the input rawText into individual "tokens"
   const tokens = useMemo(() => {
     return tokenizeRawText(rawText);
@@ -126,6 +127,7 @@ const ReaderScreen = ({ rawText }: ReaderScreenProps) => {
         setRowGap={setRowGap}
         setReaderWidth={setReaderWidth}
         setFontSize={setFontSize}
+        setRawText={setRawText}
       />
     </div>
   );

@@ -10,7 +10,7 @@ function App() {
     return <ProvideTextScreen setRawText={setRawText} />;
   }
 
-  return <ReaderScreen rawText={rawText} />;
+  return <ReaderScreen rawText={rawText} setRawText={setRawText} />;
 }
 
 export default App;

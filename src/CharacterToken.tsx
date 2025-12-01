@@ -92,7 +92,10 @@ const CharacterToken = ({
         {token.value}
       </span>
       {token.type === "chinese" && isSelected ? (
-        <CharacterInformationPopup cellWidth={cellWidth} />
+        <CharacterInformationPopup
+          cellWidth={cellWidth}
+          character={token.value}
+        />
       ) : undefined}
     </div>
   );
